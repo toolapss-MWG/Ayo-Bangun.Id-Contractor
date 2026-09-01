@@ -1,1 +1,8 @@
-{"name":"AyoBangun Contractor","short_name":"AyoBangun","start_url":".","display":"standalone","background_color":"#ffffff","icons":[{"src":"assets/logo-ayo-bangun.jpeg","sizes":"512x512","type":"image/jpeg"}]}
+{
+"name":"AyoBangun Contractor",
+"short_name":"AyoBangun",
+"display":"standalone",
+"start_url":"index.html",
+"background_color":"#c87522",
+"theme_color":"#c87522"
+}

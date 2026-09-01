@@ -1,13 +1,21 @@
 # AyoBangun Contractor
 
-PWA konstruksi siap upload GitHub dan Firebase Hosting.
+Versi Firebase Ready.
 
-Modul awal:
-- Project construction
+Fitur:
+- Project Construction Management
 - Material inventory
-- Absensi tenaga kerja
-- Progress pekerjaan
+- Material masuk keluar
+- Stock opname
+- Workforce attendance
+- Progress monitoring
 - WhatsApp report
-- Firebase config placeholder
+- PWA Android
 
-Tambahkan Firebase Auth, Firestore, dan Storage untuk produksi.
+Deploy:
+1. Upload repository ke GitHub
+2. Hubungkan Firebase Hosting
+3. Isi firebase-config.js
+4. Deploy
+
+Dikembangkan dengan tema logo Ayo Bangun.
