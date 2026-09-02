@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AyoBangun Contractor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayo Bangun.ID Contractor</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header>
-<img src="assets/logo-ayo-bangun.jpeg">
-<h1>AyoBangun Contractor</h1>
+<img src="assets/logo-ayo-bangun.jpeg" class="logo">
+<h1>Ayo Bangun.ID Contractor</h1>
 <p>Construction Project Management System</p>
 </header>
-<main>
-<section class="dashboard">
-<div>Project Aktif<h2 id="project">0</h2></div>
-<div>Material Kritis<h2 id="critical">0</h2></div>
-<div>Tenaga Hari Ini<h2 id="workers">0</h2></div>
-<div>Progress<h2 id="progress">0%</h2></div>
+<section class="login card">
+<h3>Login</h3>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Masuk</button>
+<p id="loginStatus"></p>
 </section>
-
+<main id="app" style="display:none">
+<section class="dashboard">
+<div>Project<h2 id="projectCount">0</h2></div>
+<div>Stok Kritis<h2 id="stockCount">0</h2></div>
+<div>Pekerja<h2 id="workerCount">0</h2></div>
+<div>Progress<h2 id="progressCount">0%</h2></div>
+</section>
 <nav>
 <button onclick="show('project')">Project</button>
 <button onclick="show('material')">Material</button>
-<button onclick="show('worker')">Pekerja</button>
+<button onclick="show('attendance')">Absensi</button>
+<button onclick="show('progress')">Progress</button>
 <button onclick="show('report')">Laporan</button>
 </nav>
-
 <div id="content"></div>
 </main>
-<script src="firebase-config.js"></script>
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>

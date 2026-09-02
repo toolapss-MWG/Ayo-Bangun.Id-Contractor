@@ -1,21 +1,26 @@
-# AyoBangun Contractor
+# Ayo Bangun.ID Contractor
 
-Versi Firebase Ready.
+Versi upgrade siap upload GitHub.
 
-Fitur:
-- Project Construction Management
-- Material inventory
-- Material masuk keluar
-- Stock opname
-- Workforce attendance
-- Progress monitoring
-- WhatsApp report
+Fitur dasar:
+- Multi project
+- Role Owner/Admin/Mandor
+- Material database
+- Stok material
+- Absensi tenaga kerja
+- Progress pekerjaan
+- Laporan WhatsApp
+- Firebase ready
 - PWA Android
 
-Deploy:
-1. Upload repository ke GitHub
-2. Hubungkan Firebase Hosting
-3. Isi firebase-config.js
-4. Deploy
+Login demo:
+Owner: owner / owner123
+Admin: admin / 0000
+Mandor: mandor1
 
-Dikembangkan dengan tema logo Ayo Bangun.
+Sebelum deploy:
+1. Buat Firebase project
+2. Isi firebase-config.js
+3. Aktifkan Firestore Authentication
+4. Upload repository ke GitHub
+5. Deploy Firebase Hosting
