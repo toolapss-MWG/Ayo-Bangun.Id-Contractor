@@ -1,0 +1,18 @@
+{
+  "users": {
+    "uid": {
+      "name": "",
+      "role": "owner|admin|mandor",
+      "projectAccess": [],
+      "permissions": []
+    }
+  },
+  "projects": {
+    "project_id": {
+      "materials": {},
+      "attendance": {},
+      "progress": {},
+      "reports": {}
+    }
+  }
+}
