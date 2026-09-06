@@ -1,41 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ayo Bangun.ID Contractor</title>
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-<img src="assets/logo-ayo-bangun.jpeg" class="logo">
-<h1>Ayo Bangun.ID Contractor</h1>
-<p>Construction Project Management System</p>
-</header>
-<section class="login card">
-<h3>Login</h3>
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Masuk</button>
-<p id="loginStatus"></p>
+<header><img src="assets/logo-ayo-bangun.jpeg" class="logo"><h1>Ayo Bangun.ID</h1><span id="sync">Offline</span></header>
+<section id="login" class="card">
+<h3>Login</h3><input id="username" placeholder="Username"><input id="password" type="password" placeholder="Password">
+<button onclick="login()">Masuk</button><p id="loginStatus"></p>
 </section>
-<main id="app" style="display:none">
-<section class="dashboard">
-<div>Project<h2 id="projectCount">0</h2></div>
-<div>Stok Kritis<h2 id="stockCount">0</h2></div>
-<div>Pekerja<h2 id="workerCount">0</h2></div>
-<div>Progress<h2 id="progressCount">0%</h2></div>
-</section>
-<nav>
-<button onclick="show('project')">Project</button>
-<button onclick="show('material')">Material</button>
-<button onclick="show('attendance')">Absensi</button>
-<button onclick="show('progress')">Progress</button>
-<button onclick="show('report')">Laporan</button>
-</nav>
+<main id="app" hidden>
+<div class="top"><select id="projectSelect" onchange="changeProject()"></select><button onclick="logout()">Keluar</button></div>
 <div id="content"></div>
+<nav>
+<button onclick="show('project')">🏗 Proyek</button><button onclick="show('material')">📦 Material</button>
+<button onclick="show('field')">👷 Lapangan</button><button onclick="show('report')">📱 Laporan</button>
+<button onclick="show('settings')">⚙ Pengaturan</button>
+</nav>
 </main>
 <script type="module" src="app.js"></script>
-</body>
-</html>
+</body></html>

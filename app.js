@@ -1,30 +1,23 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore,collection,addDoc,getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { firebaseConfig } from "./firebase-config.js";
 
-const appFirebase=initializeApp(firebaseConfig);
-const db=getFirestore(appFirebase);
-let role='';
-
-window.login=()=>{
- let u=document.getElementById('username').value;
- let p=document.getElementById('password').value;
- if((u==='owner'&&p==='owner123')||(u==='admin'&&p==='0000')||u.startsWith('mandor')){
- role=u==='owner'?'OWNER':u==='admin'?'ADMIN':'MANDOR';
- document.querySelector('.login').style.display='none';
- document.getElementById('app').style.display='block';
- show('project');
- }else document.getElementById('loginStatus').innerHTML='Login tidak sesuai';
-}
-
-window.show=async(type)=>{
- const c=document.getElementById('content');
- if(type==='project') c.innerHTML=`<div class="item"><h3>Project Management</h3><p>Tambah project, target pekerjaan, nilai proyek, lokasi dan dokumentasi.</p><button onclick="addProject()">Tambah Project</button></div>`;
- if(type==='material') c.innerHTML=`<div class="item"><h3>Master Material</h3><p>Semen, pasir, split, besi, bata, hebel, keramik, cat, plumbing, electrical dan finishing.</p><button onclick="addMaterial()">Input Material</button></div>`;
- if(type==='attendance') c.innerHTML=`<div class="item"><h3>Absensi Tenaga Kerja</h3><p>Mandor dapat input dan seluruh user dapat edit sesuai hak akses.</p></div>`;
- if(type==='progress') c.innerHTML=`<div class="item"><h3>Progress Pekerjaan</h3><p>Target harian, realisasi, kendala dan foto lapangan.</p></div>`;
- if(type==='report') c.innerHTML=`<div class="item"><h3>Laporan WhatsApp</h3><button onclick="wa()">Kirim WhatsApp</button></div>`;
-}
-window.addProject=async()=>{await addDoc(collection(db,'projects'),{name:'Project Baru',created:new Date()});alert('Project tersimpan Firebase')}
-window.addMaterial=async()=>{await addDoc(collection(db,'materials'),{name:'Semen',unit:'Zak',volume:0});alert('Material tersimpan')}
-window.wa=()=>window.open('https://wa.me/?text=Laporan%20Ayo%20Bangun.ID%20Contractor');
+const users={owner:{p:"owner123",r:"OWNER"},admin:{p:"0000",r:"ADMIN"},mandor1:{p:"1111",r:"MANDOR"}};
+let state=JSON.parse(localStorage.ayoBangun||'{"projects":[{"name":"Proyek Utama","lokasi":"","wa":""}],"materials":[],"absensi":[],"progress":[],"kendala":[],"role":null}');
+let project=0;
+const save=()=>localStorage.ayoBangun=JSON.stringify(state);
+window.login=()=>{let u=username.value,p=password.value;if(users[u]&&users[u].p==p){state.role=users[u].r;save();document.querySelector("#login").hidden=true;app.hidden=false;loadProjects();show("project")}else loginStatus.innerText="Login gagal"};
+window.logout=()=>location.reload();
+function loadProjects(){projectSelect.innerHTML=state.projects.map((x,i)=>`<option value="${i}">${x.name}</option>`).join("")}
+window.changeProject=()=>{project=+projectSelect.value};
+function canEdit(){return state.role!="MANDOR"}
+window.show=(x)=>{let c=document.querySelector("#content");
+if(x=="project") c.innerHTML=`<div class=box><h3>Multi Proyek</h3>${state.projects.map((p,i)=>`<p>${p.name} - ${p.lokasi||'-'}</p>`).join("")}<button onclick=addProject()>Tambah</button></div>`;
+if(x=="material") c.innerHTML=`<div class=box><h3>Katalog Material</h3><p>Material konstruksi tersimpan lokal: semen, beton, pasir, split, bata, besi, baja ringan, kayu, atap, keramik, sanitair, PVC, listrik, cat dan alat.</p><button onclick=addMaterial()>Tambah Material</button>${state.materials.map(m=>`<p>${m.n} ${m.u}: ${m.v}</p>`).join("")}</div>`;
+if(x=="field") c.innerHTML=`<div class=box><h3>Lapangan</h3><button onclick=addAbsensi()>Absensi</button><button onclick=addProgress()>Progress</button><button onclick=addKendala()>Kendala</button></div>`;
+if(x=="report") c.innerHTML=`<div class=box><h3>Laporan Harian</h3><button onclick=wa()>Kirim WhatsApp</button></div>`;
+if(x=="settings") c.innerHTML=`<div class=box><h3>User & Firebase</h3><p>Role aktif: ${state.role}. Firebase config dapat ditempel pada firebase-config.js.</p></div>`;
+};
+window.addProject=()=>{state.projects.push({name:"Proyek Baru"});save();loadProjects()};
+window.addMaterial=()=>{state.materials.push({n:"Semen",u:"Zak",v:0});save();show("material")};
+window.addAbsensi=()=>{state.absensi.push({tgl:new Date().toISOString(),status:"Hadir"});save();alert("Absensi tersimpan")};
+window.addProgress=()=>{state.progress.push({target:"",realisasi:"",persen:0});save()};
+window.addKendala=()=>{state.kendala.push({status:"Baru",solusi:""});save()};
+window.wa=()=>window.open("https://wa.me/?text="+encodeURIComponent("Laporan Ayo Bangun.ID"));
