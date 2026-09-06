@@ -1,26 +1,18 @@
-# Ayo Bangun.ID Contractor
+# Ayo Bangun.ID Contractor - Fixed Version
 
-Versi upgrade siap upload GitHub.
-
-Fitur dasar:
-- Multi project
-- Role Owner/Admin/Mandor
-- Material database
-- Stok material
-- Absensi tenaga kerja
-- Progress pekerjaan
-- Laporan WhatsApp
-- Firebase ready
-- PWA Android
+Perbaikan:
+- Struktur PWA dipertahankan
+- Firebase lebih aman saat belum dikonfigurasi
+- Modul project/material/worker/finance/report diperjelas
+- Dashboard siap dikembangkan
+- Responsive Windows dan HP
 
 Login demo:
-Owner: owner / owner123
-Admin: admin / 0000
-Mandor: mandor1
+owner / owner123
+admin / 0000
+mandor1
 
-Sebelum deploy:
-1. Buat Firebase project
-2. Isi firebase-config.js
-3. Aktifkan Firestore Authentication
-4. Upload repository ke GitHub
-5. Deploy Firebase Hosting
+Langkah deploy:
+1. Isi firebase-config.js
+2. Aktifkan Firebase Authentication dan Firestore
+3. Deploy Firebase Hosting

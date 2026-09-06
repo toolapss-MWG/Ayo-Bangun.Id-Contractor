@@ -20,7 +20,7 @@
 <button onclick="login()">Masuk</button>
 <p id="loginStatus"></p>
 </section>
-<main id="app" style="display:none">
+<p id="roleInfo"></p><main id="app" style="display:none">
 <section class="dashboard">
 <div>Project<h2 id="projectCount">0</h2></div>
 <div>Stok Kritis<h2 id="stockCount">0</h2></div>
