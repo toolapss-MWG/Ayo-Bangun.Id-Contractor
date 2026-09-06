@@ -1,2 +1,26 @@
+# Ayo Bangun.ID Contractor
 
-body{margin:0;background:#08131f;color:#fff;font-family:Arial}.card,.box{background:#fff;color:#222;margin:12px;padding:15px;border-radius:12px}header{text-align:center;padding:15px}.logo{width:90px}.top{display:flex;gap:8px;padding:10px}select,input,button,textarea{padding:10px;border-radius:8px;border:0;margin:4px}button{background:#c6922e;color:white}#content{min-height:60vh}.item{background:#fff;color:#222;margin:10px;padding:12px;border-radius:10px}nav{position:fixed;bottom:0;background:#101c24;width:100%;display:flex;flex-wrap:wrap;justify-content:center}@media(max-width:600px){nav button{width:30%}}
+Versi upgrade siap upload GitHub.
+
+Fitur dasar:
+- Multi project
+- Role Owner/Admin/Mandor
+- Material database
+- Stok material
+- Absensi tenaga kerja
+- Progress pekerjaan
+- Laporan WhatsApp
+- Firebase ready
+- PWA Android
+
+Login demo:
+Owner: owner / owner123
+Admin: admin / 0000
+Mandor: mandor1
+
+Sebelum deploy:
+1. Buat Firebase project
+2. Isi firebase-config.js
+3. Aktifkan Firestore Authentication
+4. Upload repository ke GitHub
+5. Deploy Firebase Hosting

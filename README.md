@@ -1,16 +1,8 @@
-# Ayo Bangun.ID Contractor Upgrade
-Login:
-- owner / owner123
-- admin / 0000
-- mandor1 / 1111
-
-Versi ini memiliki:
-- role login
-- multi proyek
-- material/stok dasar
-- lapangan
-- laporan WhatsApp
-- penyimpanan offline PWA
-
-Upload isi folder ke GitHub Pages.
-Tambahkan Firebase config untuk sinkronisasi real-time.
+{
+"name":"AyoBangun Contractor",
+"short_name":"AyoBangun",
+"display":"standalone",
+"start_url":"index.html",
+"background_color":"#c87522",
+"theme_color":"#c87522"
+}
