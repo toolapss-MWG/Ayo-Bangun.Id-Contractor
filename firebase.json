@@ -1,3 +1,53 @@
-{
-"hosting":{"public":".","ignore":["firebase.json"]}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig } from "./firebase-config.js";
+
+let db=null; let role="";
+try { db=getFirestore(initializeApp(firebaseConfig)); } catch(e) {}
+
+const modules={
+ project:{title:"Project Management", fields:["nama","client","lokasi","tanggal","status","progress"]},
+ material:{title:"Material Inventory", fields:["nama","jumlah","satuan","harga","supplier"]},
+ attendance:{title:"Absensi Pekerja", fields:["nama","tanggal","status","jam"]},
+ progress:{title:"Progress Pekerjaan", fields:["pekerjaan","progress","catatan"]},
+ report:{title:"Laporan", fields:[]}
+};
+
+window.login=()=>{
+ const u=username.value,p=password.value;
+ if((u==='owner'&&p==='owner123')||(u==='admin'&&p==='0000')||u.startsWith('mandor')){
+ role=u==='owner'?'OWNER':u==='admin'?'ADMIN':'MANDOR';
+ document.querySelector('.login').style.display='none';
+ app.style.display='block'; roleInfo.innerText='Role: '+role; show('project');
+ } else loginStatus.innerText='Login tidak sesuai';
+}
+
+window.show=async(type)=>{
+ const m=modules[type];
+ if(type==='report'){content.innerHTML='<div class="item"><h2>Laporan</h2><button onclick="loadReport()">Tampilkan Rekap</button><div id="reportData"></div></div>';return;}
+ let html=`<div class="item"><h2>${m.title}</h2><form id="dataForm">`;
+ m.fields.forEach(f=>html+=`<input id="${f}" placeholder="${f}">`);
+ html+=`<button type="button" onclick="saveData('${type}')">Simpan</button></form><hr><div id="list"></div></div>`;
+ content.innerHTML=html; loadData(type);
+}
+
+window.saveData=async(type)=>{
+ const obj={role,created:new Date().toISOString()};
+ modules[type].fields.forEach(f=>obj[f]=document.getElementById(f).value);
+ if(db) await addDoc(collection(db,type),obj);
+ let local=JSON.parse(localStorage.getItem(type)||'[]'); local.push(obj); localStorage.setItem(type,JSON.stringify(local));
+ alert('Data berhasil disimpan'); loadData(type);
+}
+
+async function loadData(type){
+ let rows=JSON.parse(localStorage.getItem(type)||'[]');
+ if(db){try{const snap=await getDocs(collection(db,type)); rows=snap.docs.map(d=>d.data());}catch(e){}}
+ list.innerHTML=rows.map(r=>`<p>${JSON.stringify(r)}</p>`).join('')||'Belum ada data';
+ updateDashboard();
+}
+window.loadReport=()=>{reportData.innerHTML=['project','material','attendance','progress'].map(x=>`${x}: ${(JSON.parse(localStorage.getItem(x)||'[]')).length}`).join('<br>')}
+function updateDashboard(){
+ projectCount.innerText=(JSON.parse(localStorage.getItem('project')||'[]')).length;
+ workerCount.innerText=(JSON.parse(localStorage.getItem('attendance')||'[]')).length;
+ stockCount.innerText=(JSON.parse(localStorage.getItem('material')||'[]')).length;
 }
